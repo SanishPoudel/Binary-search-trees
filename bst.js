@@ -16,3 +16,9 @@ class Node {
     this.rightChild = rightChild;
   }
 }
+
+class Tree {
+  constructor (root = null) {
+    this.root = root;
+  }
+}
