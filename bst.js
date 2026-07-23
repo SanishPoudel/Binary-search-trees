@@ -7,3 +7,12 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
+
+
+class Node {
+  constructor(value, leftChild, rightChild) {
+    this.value = value;
+    this.leftChild = leftChild;
+    this.rightChild = rightChild;
+  }
+}
