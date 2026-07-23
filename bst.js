@@ -10,7 +10,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 
 class Node {
-  constructor(value, leftChild, rightChild) {
+  constructor(value = null, leftChild = null, rightChild = null) {
     this.value = value;
     this.leftChild = leftChild;
     this.rightChild = rightChild;
