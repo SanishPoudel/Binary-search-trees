@@ -11,11 +11,17 @@ class Tree {
     this.root = root;
   }
 
-  buildTree(array = [], start = 0, end = [...new Set(array)].length - 1) {
-    array = [...new Set(array)];
-    array.sort((a,b) => a - b);
+  buildTree(array = [], start = 0, end) {
+
+    if (end === undefined) { 
+      // this is for first call scenario so we don't repeat this recursively
+      array = [...new Set(array)];
+      array.sort((a,b) => a - b);
+      end = array.length - 1;
+    }
     
     if (start > end) {
+      // escape condition
       return null;
     }
 
@@ -24,7 +30,8 @@ class Tree {
     
     root.leftChild = this.buildTree(array, start, mid - 1);
     root.rightChild = this.buildTree(array, mid + 1, end);
-
+    
+    // after everything finishes
     return root;
   }
 
