@@ -10,6 +10,24 @@ class Tree {
   constructor (root = null) {
     this.root = root;
   }
+
+  buildTree(array = [], start = 0, end = [...new Set(array)].length - 1) {
+    array = [...new Set(array)];
+    array.sort((a,b) => a - b);
+    
+    if (start > end) {
+      return null;
+    }
+
+    let mid = Math.floor((start + end) / 2);
+    let root = new Node(array[mid]); 
+    
+    root.leftChild = this.buildTree(array, start, mid - 1);
+    root.rightChild = this.buildTree(array, mid + 1, end);
+
+    return root;
+  }
+
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
