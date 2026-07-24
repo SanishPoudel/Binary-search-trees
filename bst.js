@@ -47,3 +47,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
+
+let tree = new Tree();
+tree.buildTree([1,2,3,4,5,6,7,8,9]);
+prettyPrint(tree.root);
