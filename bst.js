@@ -52,6 +52,36 @@ class Tree {
     }
     return false;    
   }    
+
+  insert(value) {
+    let leaf = new Node(value);
+    let curr = this.root;
+
+    if (!this.root) { 
+      this.root = leaf;
+      return;
+    }
+
+    let prev = null;
+    while (curr) {
+      prev = curr;
+
+      if (curr.data === value) {
+        return;
+      }
+      else if (curr.data < value) {
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+
+    if (prev.data < value) {
+      prev.right = leaf;
+    } else {
+      prev.left = leaf;
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -65,6 +95,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 let tree = new Tree();
-tree.buildTree([1,2,3,4,5,6,7,8,9]);
+tree.buildTree([1,2,4,3,5,7,8,9,10,11]);
 console.log(tree.includes(4));
+tree.insert(6);
 prettyPrint(tree.root);
