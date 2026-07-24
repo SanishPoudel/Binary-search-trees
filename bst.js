@@ -1,8 +1,8 @@
 class Node {
-  constructor(value = null, leftChild = null, rightChild = null) {
-    this.value = value;
-    this.leftChild = leftChild;
-    this.rightChild = rightChild;
+  constructor(data = null, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
   }
 }
 
@@ -28,8 +28,8 @@ class Tree {
     let mid = Math.floor((start + end) / 2);
     let root = new Node(array[mid]); 
     
-    root.leftChild = this.buildTree(array, start, mid - 1);
-    root.rightChild = this.buildTree(array, mid + 1, end);
+    root.left = this.buildTree(array, start, mid - 1);
+    root.right = this.buildTree(array, mid + 1, end);
     
     // after everything finishes
     return root;
