@@ -32,6 +32,7 @@ class Tree {
     root.right = this.buildTree(array, mid + 1, end);
     
     // after everything finishes
+    this.root = root;
     return root;
   }
 
