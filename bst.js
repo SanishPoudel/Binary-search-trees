@@ -36,6 +36,22 @@ class Tree {
     return root;
   }
 
+    includes(value) {
+    let curr = this.root;
+    
+    while (curr) {
+      if (curr.data === value) {
+        return true;
+      }
+
+      if (value < curr.data) {
+        curr = curr.left;
+      } else {
+        curr = curr.right;
+      }
+    }
+    return false;    
+  }    
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -50,4 +66,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9]);
+console.log(tree.includes(4));
 prettyPrint(tree.root);
