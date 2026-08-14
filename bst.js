@@ -82,6 +82,65 @@ class Tree {
       prev.left = leaf;
     }
   }
+
+  deleteItem(value) {
+    let curr = this.root;
+    let prev = null;
+    
+    while (curr) {
+      if (curr.data === value) {
+        // here it finds the value but now i need to delete it based on its children
+
+        // no child case
+        if (curr.left === null && curr.right === null) 
+        {
+
+          // if the root is the leaf and has no children
+          if (curr === this.root) {
+            this.root = null;
+            return;
+          }
+
+          // if the value is not root
+          if (prev.data < curr.data) {
+            prev.right = null;
+          } else {
+            prev.left = null;
+          }
+          return;
+        }
+
+        // one child case
+        else if (curr.left === null || curr.right === null) 
+        {
+          let tmpValue = (curr.left || curr.right);
+          if (prev.data > curr.data) {
+            prev.left = tmpValue;
+            return;
+          } else {
+            prev.right = tmpValue;
+            return;
+          }
+        }
+
+        // two or more child case
+        else 
+        {
+          
+        }
+
+      }
+
+      prev = curr;
+      if (value < curr.data) {
+        curr = curr.left;
+      } else {
+        curr = curr.right;
+      }
+    }
+  }
+
+
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -95,7 +154,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 let tree = new Tree();
-tree.buildTree([1,2,4,3,5,7,8,9,10,11]);
-console.log(tree.includes(4));
-tree.insert(6);
+tree.buildTree([1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
