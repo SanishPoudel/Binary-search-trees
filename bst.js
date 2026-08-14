@@ -91,6 +91,8 @@ class Tree {
       if (curr.data === value) {
         // here it finds the value but now i need to delete it based on its children
 
+        // so here i can check for this.root condition
+
         // no child case
         if (curr.left === null && curr.right === null) 
         {
@@ -126,7 +128,24 @@ class Tree {
         // two or more child case
         else 
         {
+          let head = curr;
+          prev = head;
+          curr = curr.right;
+          while (curr !== null && curr.left !== null) {
+            prev = curr;
+            curr = curr.left;
+          }
+          let successor = curr;
+          let tmp = head.data;
+          head.data = successor.data;
+          successor.data = tmp;
           
+          if (prev === head) {
+            prev.right = successor.right;
+            return;
+          }
+          prev.left = successor.right;
+          return;
         }
 
       }
@@ -154,5 +173,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 let tree = new Tree();
-tree.buildTree([1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
+tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
+prettyPrint(tree.root);
+tree.deleteItem(7);
 prettyPrint(tree.root);
