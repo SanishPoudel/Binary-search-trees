@@ -236,6 +236,56 @@ class Tree {
     callback(node.data);
   }
 
+  height(value) {
+    let curr = this.root;
+    
+    while (curr) {
+      if (curr.data === value) {
+          // it finds the value here but now i need to go from here to the closest leaf node. use a queue based approach like in bfs.
+        let queue = [];
+        let level = 0
+
+        queue.push({curr, level});
+        let result;
+
+        while (queue.length != 0) {
+          result = queue.shift();
+          
+          if (!result.curr.left && !result.curr.right) {
+            return result.level;
+          }
+
+          if (result.curr.left) {
+
+            let pair = {
+              curr: result.curr.left,
+              level: result.level +1}
+              ;
+
+            queue.push(pair);
+
+          }
+          if (result.curr.right) {
+
+            let pair = {
+              curr: result.curr.right, 
+              level: result.level + 1
+            };
+            queue.push(pair);
+
+          }
+        }
+      }
+
+      if (value < curr.data) {
+        curr = curr.left;
+      } else {
+        curr = curr.right;
+      }
+    }
+    return undefined; 
+  }
+
   depth(value) {
     let curr = this.root;
     let count = 0;
@@ -271,4 +321,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
-console.log(tree.height(9));
+console.log(tree.height(7));
