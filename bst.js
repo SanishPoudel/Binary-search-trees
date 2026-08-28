@@ -180,7 +180,7 @@ class Tree {
 
   preOrderForEach(callback, node = this.root) {
     if (typeof callback != "function") {
-      throw new Error("Callback function is required");
+      throw new Error("Why no callback function?");
     }
 
     if (!node) {
@@ -216,6 +216,26 @@ class Tree {
     }
   }
 
+  postOrderForEach(callback, node = this.root) {
+    if (typeof callback != "function") {
+      throw new Error("You forgot the callback function.")
+    }
+
+    if (!node) {
+      return;
+    }
+
+    if (node.left) {
+      this.postOrderForEach(callback, node.left);
+    }
+
+    if (node.right) {
+      this.postOrderForEach(callback, node.right);
+    }
+
+    callback(node.data);
+  }
+
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -231,6 +251,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
-tree.inOrderForEach(function a(b) {
+tree.postOrderForEach(function a(b) {
   console.log(b);
 });
