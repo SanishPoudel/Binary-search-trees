@@ -176,9 +176,25 @@ class Tree {
         queue.push(value.right);
       }
     }
-
   }
 
+  preOrderForEach(callback, node = this.root) {
+    if (typeof callback != "function") {
+      throw new Error("Callback function is required");
+    }
+
+    if (!node) {
+      return;
+    }
+
+    callback(node.data);
+    if (node.left) {
+      this.preOrderForEach(callback, node.left);
+    }
+    if (node.right) {
+      this.preOrderForEach(callback, node.right)
+    }
+  }
 
 }
 
@@ -195,6 +211,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
-tree.levelOrderForEach(function a(b){
+tree.preOrderForEach(function a(b) {
   console.log(b);
 });
