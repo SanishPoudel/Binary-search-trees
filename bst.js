@@ -156,6 +156,29 @@ class Tree {
     }
   }
 
+  levelOrderForEach(callback) {
+    if (typeof callback != "function") {
+      throw new Error("Callback function is required");
+    }
+    let queue = [];
+    if (this.root === null) {
+      return;
+    }
+
+    queue.push(this.root);
+    while (queue.length != 0) {
+      let value = queue.shift();
+      callback(value.data);
+      if (value.left) {
+        queue.push(value.left);
+      }
+      if (value.right) {
+        queue.push(value.right);
+      }
+    }
+
+  }
+
 
 }
 
@@ -172,5 +195,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
-tree.deleteItem(7);
-prettyPrint(tree.root);
+tree.levelOrderForEach(function a(b){
+  console.log(b);
+});
