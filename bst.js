@@ -236,6 +236,26 @@ class Tree {
     callback(node.data);
   }
 
+  depth(value) {
+    let curr = this.root;
+    let count = 0;
+    
+    while (curr) {
+      if (curr.data === value) {
+        return count;
+      }
+
+      if (value < curr.data) {
+        curr = curr.left;
+        count ++;
+      } else {
+        curr = curr.right;
+        count ++;
+      }
+    }
+    return undefined; 
+  }
+
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -251,6 +271,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let tree = new Tree();
 tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
 prettyPrint(tree.root);
-tree.postOrderForEach(function a(b) {
-  console.log(b);
-});
+console.log(tree.height(9));
