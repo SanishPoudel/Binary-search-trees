@@ -241,7 +241,7 @@ class Tree {
     
     while (curr) {
       if (curr.data === value) {
-          // it finds the value here but now i need to go from here to the closest leaf node. use a queue based approach like in bfs.
+
         let queue = [];
         let level = 0
 
@@ -259,9 +259,8 @@ class Tree {
 
             let pair = {
               curr: result.curr.left,
-              level: result.level +1}
-              ;
-
+              level: result.level +1
+            };
             queue.push(pair);
 
           }
@@ -306,6 +305,33 @@ class Tree {
     return undefined; 
   }
 
+  isBalanced(curr = this.root) {
+    if (!curr) {
+      return {
+        balanced: true,
+        height: 0
+      };
+    }
+    let left = this.isBalanced(curr.left);
+    if (!left.balanced) {
+      return {balanced: false};
+    }
+
+    let right = this.isBalanced(curr.right);
+    if (!right.balanced) {
+      return {balanced: false};
+    }
+
+    let diff = Math.abs(left.height - right.height);
+    if (diff > 1) {
+      return {balanced: false}
+    }
+
+    return {
+      balanced: true,
+      height: Math.max(left.height, right.height) + 1
+    };
+  }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
