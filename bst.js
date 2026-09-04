@@ -332,6 +332,14 @@ class Tree {
       height: Math.max(left.height, right.height) + 1
     };
   }
+
+  rebalance() {
+    let arr = [];
+    this.levelOrderForEach(function list(item) {
+      arr.push(item);
+    });
+    this.buildTree(arr);
+  }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -345,6 +353,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 
 let tree = new Tree();
-tree.buildTree([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]);
+tree.buildTree([1,2]);
 prettyPrint(tree.root);
-console.log(tree.height(7));
+console.log(tree.deleteItem(1));
+prettyPrint(tree.root);
