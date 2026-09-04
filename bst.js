@@ -89,12 +89,25 @@ class Tree {
     
     while (curr) {
       if (curr.data === value) {
-        // here it finds the value but now i need to delete it based on its children
 
-        // if the root is the leaf and has no children
           if (curr === this.root) {
-            this.root = null;
-            return;
+
+            // if the root is the leaf and has no children
+            if (curr.left === null && curr.right === null) {
+              this.root = null;
+              return;
+            }
+            
+            if (curr.left === null) {
+              this.root = curr.right;
+              return;
+            }
+
+            if (curr.right === null) {
+              this.root = curr.left;
+              return;
+            }
+
           }
 
         // no child case
